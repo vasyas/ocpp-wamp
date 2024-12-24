@@ -57,7 +57,7 @@ const defaultOptions: RpcClientOptions = {
   syncRemoteCalls: true,
   delayCalls: 0,
   connectionTimeout: 10 * 1000,
-  connectOnCreate: true
+  connectOnCreate: true,
 }
 
 export class RpcClient<R> {
@@ -107,6 +107,11 @@ export class RpcClient<R> {
           connected = true
           safeListener(() => this.opts.listeners.connected())
           this.session.open(socket)
+
+          if (this.disconnectedMark) {
+            socket.disconnect()
+          }
+
           resolve()
         })
 

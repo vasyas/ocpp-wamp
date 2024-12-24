@@ -362,4 +362,41 @@ describe("connection", () => {
 
     await client.disconnect()
   })
+
+  it("late connect will keep client refererenced", async () => {
+    const delay = 300
+
+    const rpcServer = await startTestServer(
+      {},
+      {
+        createConnectionContext: async () => ({
+          remoteId: "client",
+        }),
+      },
+      {
+        verifyClient: (info, done) => {
+          setTimeout(() => {
+            done(true)
+          }, delay)
+        },
+      }
+    )
+
+    const testClient = await createRpcClient(
+      async () => createNodeWebsocket(`ws://localhost:${TEST_PORT}`),
+      {
+        connectOnCreate: false,
+      }
+    )
+
+    testClient.connectionLoop()
+
+    await new Promise(r => setTimeout(r, 100))
+
+    testClient.disconnect()
+
+    await new Promise(r => setTimeout(r, delay))
+
+    assert.equal(rpcServer.getConnectedIds().length, 0)
+  })
 })
