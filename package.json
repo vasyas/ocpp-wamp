@@ -1,0 +1,33 @@
+{
+  "private": true,
+  "engines": {
+    "yarn": ">=1.17.3"
+  },
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "build": "lerna run build",
+    "test": "lerna run test",
+    "publish": "",
+    "api-doc": "./api-doc.sh core && ./api-doc.sh websocket && ./api-doc.sh http && ./api-doc.sh tcp"
+  },
+  "name": "push-rpc",
+  "version": "1.1.0",
+  "main": "index.js",
+  "repository": "https://github.com/vasyas/push-rpc.git",
+  "author": "vasyas <vasyl@stashuk.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chai": "^4.2.2",
+    "@types/mocha": "^5.2.7",
+    "@types/ws": "^6.0.3",
+    "chai": "^4.2.0",
+    "lerna": "^3.22.1",
+    "mocha": "^6.2.0",
+    "prettier": "^1.19.1",
+    "ts-node": "^8.3.0",
+    "typedoc": "^0.25.3",
+    "typedoc-plugin-markdown": "^3.17.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {}
+}
