@@ -30,6 +30,7 @@ export interface RpcClientOptions {
   syncRemoteCalls: boolean
   delayCalls: number
   connectionTimeout: number
+  connectOnCreate: boolean // instead, do not start connection loop on creating RpcClient, call connect() directly
 }
 
 const defaultOptions: RpcClientOptions = {
@@ -56,6 +57,7 @@ const defaultOptions: RpcClientOptions = {
   syncRemoteCalls: true,
   delayCalls: 0,
   connectionTimeout: 10 * 1000,
+  connectOnCreate: true
 }
 
 export class RpcClient<R> {
@@ -209,10 +211,12 @@ export async function createRpcClient<R = any>(
 
   const client = new RpcClient<R>(session, createSocket, opts)
 
-  if (opts.reconnect) {
-    await client.connectionLoop()
-  } else {
-    await client.connect()
+  if (opts.connectOnCreate) {
+    if (opts.reconnect) {
+      await client.connectionLoop()
+    } else {
+      await client.connect()
+    }
   }
 
   return client
