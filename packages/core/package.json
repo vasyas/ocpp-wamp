@@ -13,10 +13,13 @@
     "json-stringify-safe": "^5.0.1",
     "uuid-js": "^0.7.5"
   },
+  "devDependencies": {
+    "ws": "7"
+  },
   "repository": "https://github.com/vasyas/push-rpc.git",
   "author": "Vasyl Stashuk <vasyl@stashuk.com>",
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "cac588b8c118843655324a23250020d7f6f1f090"
+  "gitHead": "2c29fc8612e268a5011ec711d835d75b26e764e4"
 }

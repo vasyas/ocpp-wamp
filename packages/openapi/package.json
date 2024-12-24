@@ -29,5 +29,5 @@
   "bin": {
     "push-rpc-openapi": "./dist/cli.js"
   },
-  "gitHead": "cac588b8c118843655324a23250020d7f6f1f090"
+  "gitHead": "2c29fc8612e268a5011ec711d835d75b26e764e4"
 }
